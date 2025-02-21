@@ -1,0 +1,19 @@
+.game-container {
+  background-color: #000;
+  padding: 20px;
+  font-family: 'Press Start 2P', cursive;
+  color: #FFD700;
+}
+
+.score {
+  margin-bottom: 20px;
+}
+
+.game-over {
+  margin-bottom: 20px;
+  color: red;
+}
+
+.instructions {
+  margin-top: 20px;
+} 
