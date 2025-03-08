@@ -1,37 +1,59 @@
-import Wall from './Wall'
-import Dot from './Dot'
-import Pacman from './Pacman'
-import Ghost from './Ghost'
-import { GRID_SIZE, CELL_SIZE } from '../constants/gameConstants'
+import React from 'react';
+import './Board.css';
 
-export default function Board({ maze, dots, pacmanPos, ghosts, direction, mouthOpen, gameOver }) {
+const Board = ({ maze, dots, pacmanPos, ghosts, direction, mouthOpen }) => {
   return (
-    <div style={{
-      width: GRID_SIZE * CELL_SIZE,
-      height: GRID_SIZE * CELL_SIZE,
-      backgroundColor: '#000',
-      position: 'relative',
-      margin: '0 auto'
-    }}>
-      {/* Render Walls */}
-      {maze.map((row, y) => 
-        row.map((cell, x) => 
-          cell === 1 && <Wall key={`${x}-${y}`} x={x} y={y} />
-        )
-      )}
-
-      {/* Render Dots */}
-      {dots.map((dot, i) => (
-        <Dot key={i} {...dot} />
+    <div className="board">
+      {/* Render maze */}
+      {maze.map((row, y) => (
+        <div key={y} className="row">
+          {row.split('').map((cell, x) => (
+            <div key={`${x}-${y}`} className={`cell ${cell === '#' ? 'wall' : ''}`} />
+          ))}
+        </div>
       ))}
-      
+
+      {/* Render dots */}
+      {dots.map((dot, index) => (
+        <div
+          key={`dot-${index}`}
+          className={`dot ${dot.type}`}
+          style={{
+            left: `${dot.x * 20}px`,
+            top: `${dot.y * 20}px`,
+          }}
+        />
+      ))}
+
       {/* Render Pacman */}
-      <Pacman position={pacmanPos} direction={direction} mouthOpen={mouthOpen} />
+      <div
+        className={`pacman ${mouthOpen ? 'mouth-open' : ''}`}
+        style={{
+          left: `${pacmanPos.x * 20}px`,
+          top: `${pacmanPos.y * 20}px`,
+          transform: `rotate(${
+            direction === 'right' ? 0 :
+            direction === 'down' ? 90 :
+            direction === 'left' ? 180 :
+            direction === 'up' ? 270 : 0
+          }deg)`,
+        }}
+      />
 
       {/* Render Ghosts */}
-      {ghosts.map((ghost, i) => (
-        <Ghost key={i} {...ghost} />
+      {ghosts.map((ghost, index) => (
+        <div
+          key={`ghost-${index}`}
+          className="ghost"
+          style={{
+            left: `${ghost.x * 20}px`,
+            top: `${ghost.y * 20}px`,
+            backgroundColor: ghost.color,
+          }}
+        />
       ))}
     </div>
-  )
-} 
+  );
+};
+
+export default Board; 

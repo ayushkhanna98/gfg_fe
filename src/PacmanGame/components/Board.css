@@ -1,0 +1,61 @@
+.board {
+  position: relative;
+  width: 560px;
+  height: 620px;
+  background: black;
+  margin: 20px auto;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+}
+
+.wall {
+  background: blue;
+}
+
+.dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  margin: 7px;
+}
+
+.dot.power {
+  width: 12px;
+  height: 12px;
+  margin: 4px;
+}
+
+.pacman {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: yellow;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.pacman.mouth-open::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: black;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.ghost {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px 10px 2px 2px;
+  transition: all 0.2s;
+} 

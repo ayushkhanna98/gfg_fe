@@ -1,18 +1,15 @@
-import { useEffect } from 'react'
-import { MAZE } from '../constants/gameConstants'
+import { useEffect } from 'react';
 
-export function useInitializeGame({ setDots }) {
+export const useInitializeGame = ({ setDots }) => {
   useEffect(() => {
-    const initialDots = []
-    for (let y = 0; y < MAZE.length; y++) {
-      for (let x = 0; x < MAZE[0].length; x++) {
-        if (MAZE[y][x] === 2) {
-          initialDots.push({ x, y, type: 'dot' })
-        } else if (MAZE[y][x] === 3) {
-          initialDots.push({ x, y, type: 'power' })
+    const dots = [];
+    for (let x = 1; x < 27; x++) {
+      for (let y = 1; y < 30; y++) {
+        if (x % 2 === 0 && y % 2 === 0) {
+          dots.push({ x, y, type: 'normal' });
         }
       }
     }
-    setDots(initialDots)
-  }, [setDots])
-} 
+    setDots(dots);
+  }, [setDots]);
+}; 
